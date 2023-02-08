@@ -5,8 +5,8 @@ import json
 def create_user() -> dict:
     user = str(input('Digite um usuário para cadastro: ')).strip()
     password = str(input('Digite uma senha para cadastro: ')).strip()
-    login_input: dict = {user: password}
-    with open('users_db.json', 'w+', encoding='utf8') as arquivo:
+    login_input: dict = {'user': user, 'password': password}
+    with open('users_db.json', 'a+', encoding='utf8') as arquivo:
         try:
             json.dump( login_input ,arquivo, indent=2, ensure_ascii=False)
         except Exception:
@@ -16,16 +16,17 @@ def create_user() -> dict:
 
 
 def login(user, password):
-    user = str(input('Digite seu usuário: ')).strip()
-    password = str(input('Digite sua senha: ')).strip()
-    with open('users_db.json', 'r', encoding='utf8'):
+    with open('users_db.json', 'r', encoding='utf8') as arquivo:
         try:
-            ...
+            print(json.load(arquivo))
+            
+            
+            
         except:
             ...
         finally:
             ...
-    return User(user)
+    return User(user, password)
 
 
 def home_menu(options: dict) -> int:
@@ -36,9 +37,6 @@ def home_menu(options: dict) -> int:
 
 
 class User:
-    def __init__(self, user, password, email, phone) -> None:
+    def __init__(self, user, password) -> None:
         self.user = user
         self.password = password
-
-    def login(user, password):
-        ...
